@@ -42,3 +42,37 @@ It may happen that the chessboard in video moved too fast that the calibrate can
     rosbag play -r 0.3 rosbag_file_name.bag
 
 
+
+## 1.2 Rectify RGB image by generating rectified rosbag data
+
+As the camera intrinsic parameters are obtained, the original rosbag data can be rectified by using apt-get:
+
+    sudo apt-get install ros-indigo-bag-tools
+
+If you are using ROS Indigo, you can try to install the package by building from the [source](https://github.com/srv/srv_tools):
+
+Go to /src in your ROS workspace
+
+    cd catkin_ws/src
+
+Clone srv_tools repo:
+
+    git clone https://github.com/srv/srv_tools.git
+
+Install:
+
+    cd ..
+    catkin_make
+    source devel/setup.bash
+
+
+
+
+If you are using ROS Kinetic, you can try to install the package by building from the [source](https://github.com/srv/srv_tools)
+
+
+Now we can rectify the rosbag data by creating a new one based on the yaml file obtained from camera calibrator:
+
+    python change_camera_info.py /path_to_original_bag_data.bag /path_to_new_bag_data.bag /sensors/camera/camera_info=/path_to_yaml_file.yaml
+
+
