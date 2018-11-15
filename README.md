@@ -29,7 +29,12 @@ Open another terminal window and start the ROS cameracalibrator:
 
     rosrun camera_calibration cameracalibrator.py --size 5x7 --square 0.05 image:=/sensors/camera/image_color
 
-A GUI window will show up and start detecting chessboard. As the chessboard being moved around the calibration sidebars increase in length. When the CALIBRATE button turns green, it mean the calibrator is ready to calulate the camera intrinsic parameters. Click on the CALIBRATE button to start calculation. When this is done, Click SAVE to save the result and click COMMIT to apply the new camera intrinsic parameters to the camera info.
+<p align="center">
+    <img src="http://zhenyuyang.usite.pro/rgbd_calib/calibrator_all_button.png">
+</p>
+
+
+A GUI window will show up and start detecting chessboard. As the chessboard being moved around the calibration sidebars increase in length. When the CALIBRATE button turns green, it mean the calibrator is ready to calulate the camera intrinsic parameters. Click on the CALIBRATE button to start calculation. When this is done, click COMMIT to apply the new camera intrinsic parameters to the camera info. Click SAVE to save the calibration results, results will be saved as /tmp/calibrationdata.tar.gz. This compressed file contains ost.yaml files, which will be used to rectify the RGB camera frames.
 
 
 It may happen that the chessboard in video moved too fast that the calibrate cannot capture enough frames for calibration. One solution is slowing down the framerate by add -r 0.3 flag to rosbag play to play the bag at X0.3 speed:
