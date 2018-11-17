@@ -1,4 +1,4 @@
-#!ausr/bin/env python
+#!/usr/bin/env python
 # license removed for brevity
 
 
@@ -18,7 +18,7 @@ from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 cameraModel = PinholeCameraModel()
-pub_pose = rospy.Publisher('fusion_pose', Pose, queue_size=10)
+pub_pose = rospy.Publisher('lidar_pose', Pose, queue_size=10)
 pose_fusion = {}
 isRTFound = False
 
