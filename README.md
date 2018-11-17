@@ -96,4 +96,18 @@ Rectified image:
 
 
 
+## 1.3 camera-lidar extrinsic parameters calibration
+
+The camera-lidar extrinsic parameters calibration is based on the correspondence between a set of 2D points in image and a set of 3D points in point cloud. This correspondence can be obtained by directly selecting points on a pair of 2D frame and 3D frame. In my approach I store the correspondence points in a txt file called corr.txt with the following format:
+
+point2D_x,point2D_y,point3D_x,point3D_y,point3D_z
+
+Node transformation_estimator was created to perform calculation of transformation between camera and lidar. The idea here is to give an initail transformation and project the 3D point into 2D space, then get the error as sum of the eurclidian distance between each selected 2D point and projected 2D point pair, and then minimize the error to get a estimation of trasformation between camera and lidar.
+
+Run this node with rosrun, and when a estimated transformation is found, this node will publish the transformation as a Pose message.
+
+    rosrun camera_lidar_fusion transformation_estimator.py
+
+
+ 
  
