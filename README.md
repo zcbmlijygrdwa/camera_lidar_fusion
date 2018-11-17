@@ -104,10 +104,24 @@ point2D_x,point2D_y,point3D_x,point3D_y,point3D_z
 
 Node transformation_estimator was created to perform calculation of transformation between camera and lidar. The idea here is to give an initail transformation and project the 3D point into 2D space, then get the error as sum of the eurclidian distance between each selected 2D point and projected 2D point pair, and then minimize the error to get a estimation of trasformation between camera and lidar.
 
-Run this node with rosrun, and when a estimated transformation is found, this node will publish the transformation as a Pose message.
+Run this node with rosrun, and when a estimated transformation is found, this node will publish the transformation as a Pose message as topic /lidar_pose.
 
     rosrun camera_lidar_fusion transformation_estimator.py
 
 
  
  
+## 1.4 Projections
+
+As the static transform between the camera and the lidar is obtained, projection can be made. The projection node subscribe to the /lidar_pose topic, and uses the transform information to project 3D points onto RGB image and find the corresponding colors for 3D points. This node publishes results as /image_color_with_proj (image with 3D points projection) and /pointcloud_color (point cloud data with color information). 
+
+    rosrun camera_lidar_fusion projection.py
+
+
+ 
+## 1.5 Visualization
+We can use RVIZ to visulization the results. Open the rivz:
+
+    rviz
+
+With the rviz GUI loaded, we can display the RGB image with projected 3D points by adding visulization by topic /image_color_with_proj.  We can display the colored point cloud by adding visulization by topic /pointcloud_color. 
