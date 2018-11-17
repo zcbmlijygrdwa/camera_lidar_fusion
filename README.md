@@ -124,4 +124,14 @@ We can use RVIZ to visulization the results. Open the rivz:
 
     rviz
 
-With the rviz GUI loaded, we can display the RGB image with projected 3D points by adding visulization by topic /image_color_with_proj.  We can display the colored point cloud by adding visulization by topic /pointcloud_color. 
+With the rviz GUI loaded, we can display the RGB image with projected 3D points by adding visulization by topic /image_color_with_proj.  We can display the colored point cloud by adding visulization by topic /pointcloud_color.
+
+
+<p align="center">
+    <img src="http://zhenyuyang.usite.pro/rgbd_calib/final_rgb.png">
+</p>
+ 
+<p align="center">
+    <img src="http://zhenyuyang.usite.pro/rgbd_calib/final_pc.png">
+</p>
+ 
