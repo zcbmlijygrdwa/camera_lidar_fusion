@@ -49,7 +49,7 @@ In a new terminal window use image_proc tool to recify the rgb image and publish
 Use image_view2 in image_view2 ROS package to get pixel coordinates;
 
     apt-get install ros-kinetic-image-view2
-    rosrun image_view2 image_ew2 image:=/sensors/camera/image_rect_color
+    rosrun image_view2 image_view2 image:=/sensors/camera/image_rect_color
 
 Use Publish Point in rviz to get coordinates of corresponding 3D points in point cloud:
 

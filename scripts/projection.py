@@ -80,7 +80,7 @@ def RGBD_callback(image_data,pointCloud_data):
                     continue
                 projected_2d_point = cameraModel.project3dToPixel( transformedPoint )
                 #projection
-                if projected_2d_point[ 0 ] >= 0 and projected_2d_point[ 0 ] <= width and projected_2d_point[ 1 ] >= 0 and projected_2d_point[ 1 ] <= height:
+                if projected_2d_point[ 0 ] >= 0 and projected_2d_point[ 0 ] <= height and projected_2d_point[ 1 ] >= 0 and projected_2d_point[ 1 ] <= width:
                     cv2.circle(cv_temp, (int(projected_2d_point[0]), int(projected_2d_point[1])), 5,  (intensityInt % 255, ( intensityInt / 255 ) % 255, ( intensityInt / 255 / 255 )), thickness = -1 )
                     [b,g,r] = cv_image[int(projected_2d_point[1]),int(projected_2d_point[0 ])]
                     new_points.append([point[0],point[1],point[2],intensity,r/255.0,g/255.0,b/255.0])
@@ -142,7 +142,7 @@ def lidarToRGB():
     pub_image = rospy.Publisher("image_color_with_proj",Image)
     pub_pc = rospy.Publisher("pointcloud_color", PointCloud2, queue_size = 1 )
 
-    sub_image = message_filters.Subscriber('sensors/camera/image_color', Image)
+    sub_image = message_filters.Subscriber('sensors/camera/image_rect_color', Image)
     sub_pointcloud = message_filters.Subscriber('sensors/velodyne_points', PointCloud2)
 
     ts = message_filters.ApproximateTimeSynchronizer([sub_image, sub_pointcloud], 1,0.1)
