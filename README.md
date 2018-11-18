@@ -2,7 +2,74 @@
 This project was created to calibrate camera and lidar. It calculates transformation between RGB camera frame and Lidar point cloud frame, projects a point cloud onto RGB image and, and projects RGB image pixels onto a point cloud.
 
 
+### Related Papers
+
+* **LSD-SLAM: Large-Scale Direct Monocular SLAM**, *J. Engel, T. Schöps, D. Cremers*, ECCV '14
+
+* **Semi-Dense Visual Odometry for a Monocular Camera**, *J. Engel, J. Sturm, D. Cremers*, ICCV '13
+
+
+
+
 # 1. Quickstart / Minimal Setup
+
+Start roscore:
+
+    roscore
+
+Play rosbag:
+
+    rosbag play rosbag_file_name.bag
+
+Use camera_calibration tool to perform calibration, and save the results:
+
+    rosrun camera_calibration cameracalibrator.py --size 5x7 --square 0.05 image:=/sensors/camera/image_color
+
+Fetch yaml file from the results:
+
+    roscd camera_lidar_fusion/data/
+    cp /tmp/calibrationdata.tar.gz ./
+    tar xvzf calibrationdata.tar.gz ost.yaml
+    rm calibrationdata.tar.gz
+
+Create a new rosbag data file with updated camera_info based on the yaml file.
+
+    roscd camera_lidar_fusion/scripts/
+    python change_camera_info.py /path_to_original_bag_data.bag /path_to_new_bag_data.bag /sensors/camera/camera_info=../data/ost.yaml
+
+
+Play the newly generated rosbag file and use image_proc tool to recify the rgb image and publish the results:
+
+    rosbag play /path_to_new_bag_data.bag
+    
+In a new terminal window use image_proc tool to recify the rgb image and publish the results:
+
+    ROS_NAMESPACE=sensors/camera rosrun image_proc image_proc image_raw:=image_color
+    
+Use image_view2 in image_view2 ROS package to get pixel coordinates;
+
+    apt-get install ros-kinetic-image-view2
+    rosrun image_view2 image_ew2 image:=/sensors/camera/image_rect_color
+
+Use Publish Point in rviz to get coordinates of corresponding 3D points in point cloud:
+
+    rviz
+
+Write the 2D-3D point pairs in /data/corr.txt. At lease 9 pairs are needed.
+
+Run transformation_estimator to estimate the static transform between camera and lidar:
+
+    rosrun camera_lidar_fusion transformation_estimator.py
+
+Start projection node:
+
+    rosrun camera_lidar_fusion projection.py
+
+Visulize the projections in rivz.
+
+
+# 1. Quickstart / Minimal Setup
+
 
 The calibration consists three main steps:
 1) camera intrinsic parameters calibration
