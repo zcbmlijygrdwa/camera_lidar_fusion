@@ -68,17 +68,16 @@ Start projection node:
 Visulize the projections in rivz.
 
 
-# 1. Quickstart / Minimal Setup
+# 2. Details
 
 
 The calibration consists three main steps:
 1) camera intrinsic parameters calibration
 2) camera-lidar extrinsic parameters calibration
-3) camera-lidar projection
-4) lidar-camera projection
-5) visualization
+3) camera-lidar and lidar-camera projection
+4) visualization
 
-## 1.1 Camera intrinsic parameters calibration
+## 2.1.1 Camera intrinsic parameters calibration
 
 The camera intrinsic parameters can be estimated by using the [cameracalibrator tool](http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration) from ROS camera_calibration package.
 
@@ -110,7 +109,7 @@ It may happen that the chessboard in video moved too fast that the calibrate can
 
 
 
-## 1.2 Update the camera intrinsic parameters in rosbag data
+## 2.1.2 Update the camera intrinsic parameters in rosbag data
 
 As the camera intrinsic parameters are obtained, the original rosbag data can be updated by using bag_tools from ROS.
 
@@ -163,7 +162,7 @@ Rectified image:
 
 
 
-## 1.3 camera-lidar extrinsic parameters calibration
+## 2.2 camera-lidar extrinsic parameters calibration
 
 The camera-lidar extrinsic parameters calibration is based on the correspondence between a set of 2D points in image and a set of 3D points in point cloud. This correspondence can be obtained by directly selecting points on a pair of 2D frame and 3D frame. In my approach I store the correspondence points in a txt file called corr.txt with the following format:
 
@@ -178,7 +177,7 @@ Run this node with rosrun, and when a estimated transformation is found, this no
 
  
  
-## 1.4 Projections
+## 2.3 Projections
 
 As the static transform between the camera and the lidar is obtained, projection can be made. The projection node subscribe to the /lidar_pose topic, and uses the transform information to project 3D points onto RGB image and find the corresponding colors for 3D points. This node publishes results as /image_color_with_proj (image with 3D points projection) and /pointcloud_color (point cloud data with color information). 
 
@@ -186,7 +185,7 @@ As the static transform between the camera and the lidar is obtained, projection
 
 
  
-## 1.5 Visualization
+## 2.4 Visualization
 We can use RVIZ to visulization the results. Open the rivz:
 
     rviz
