@@ -19,7 +19,7 @@ Start roscore:
 
 Play rosbag:
 
-    rosbag play rosbag_file_name.bag
+    rosbag play your_rosbag_file_name.bag
 
 Use camera_calibration tool to perform calibration, and save the results:
 
@@ -88,7 +88,7 @@ Start this procedure by starting roscore:
 
 Open another terminal window and play the rosbag:
 
-    rosbag play rosbag_file_name.bag
+    rosbag play your_rosbag_file_name.bag
 
 
 Open another terminal window and start the ROS cameracalibrator:
@@ -105,7 +105,7 @@ A GUI window will show up and start detecting chessboard. As the chessboard bein
 
 It may happen that the chessboard in video moved too fast that the calibrate cannot capture enough frames for calibration. One solution is slowing down the framerate by add -r 0.3 flag to rosbag play to play the bag at X0.3 speed:
 
-    rosbag play -r 0.3 rosbag_file_name.bag
+    rosbag play -r 0.3 your_rosbag_file_name.bag
 
 
 
